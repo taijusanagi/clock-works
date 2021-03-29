@@ -5,8 +5,7 @@ import { tokenURIs, GROWTH_TIME, MAX_GORWTH_COUNT } from "../helpers/constants";
 const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 10000000000; //10 gwei
 
 const main = async () => {
-  const contractName = "Cryptodolls";
-  const Contract = await ethers.getContractFactory(contractName);
+  const Contract = await ethers.getContractFactory("Cryptodoll");
   const contract = await Contract.deploy("Cryptodoll", "CD", GROWTH_TIME, MAX_GORWTH_COUNT, tokenURIs, {
     gasPrice,
   });

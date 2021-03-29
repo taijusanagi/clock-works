@@ -7,7 +7,8 @@ import {
   HAS_SECONRARY_SALE_FEES,
   tokenURIs,
   cids,
-  TIMESTAMP_DAY,
+  GROWTH_TIME,
+  MAX_GORWTH_COUNT,
 } from "../helpers/constants";
 
 chai.use(solidity);
@@ -18,7 +19,7 @@ const name = "name";
 const symbol = "symbol";
 
 const addOneDay = async () => {
-  await network.provider.send("evm_increaseTime", [TIMESTAMP_DAY]);
+  await network.provider.send("evm_increaseTime", [GROWTH_TIME]);
   await network.provider.send("evm_mine");
 };
 
@@ -28,7 +29,7 @@ describe("Chocomold", function () {
   this.beforeEach("initialization.", async function () {
     [signer] = await ethers.getSigners();
     const Contract = await ethers.getContractFactory("Cryptodoll");
-    dollContract = await Contract.deploy(name, symbol, tokenURIs);
+    dollContract = await Contract.deploy(name, symbol, GROWTH_TIME, MAX_GORWTH_COUNT, tokenURIs);
   });
   it("deploy check", async function () {
     expect(await dollContract.name()).to.equal(name);
@@ -43,7 +44,6 @@ describe("Chocomold", function () {
   it("check token url", async function () {
     const max = 30;
     for (let i = 0; i <= max; i++) {
-      console.log("i", i);
       expect(await dollContract.tokenURI(tokenId)).to.equal("ipfs://" + cids[i]);
       await addOneDay();
     }

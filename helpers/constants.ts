@@ -2,7 +2,9 @@ export const HAS_SECONRARY_SALE_FEES = 0xb7799584;
 export const ERC721_INTERFACE_ID = 0x80ac58cd;
 export const ERC721_METADATA_INTERFACE_ID = 0x5b5e139f;
 
-export const TIMESTAMP_DAY = 86400;
+// export const GROWTH_TIME = 86400; // production
+export const GROWTH_TIME = 3600; // test
+export const MAX_GORWTH_COUNT = 30;
 
 export const cids = [
   "QmRWpkR7fYBL5Xy2UMAWu8WvQepHCCR3Hy6V5D4KZ2hsji",

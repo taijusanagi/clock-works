@@ -10,18 +10,22 @@ contract Cryptodoll is ERC721 {
     using IPFS for bytes;
 
     uint256 public constant TOKEN_ID = 1;
-    uint256 public constant GROWTH_TIME = 1 days;
-    uint256 public constant MAX_GROWTH_COUNT = 30;
-
+    uint256 public growthTime;
+    uint256 public maxGrowthCount;
     bytes32[] public tokenURIs;
     uint256 public growthStartedAt;
 
     constructor(
         string memory _name,
         string memory _symbol,
+        uint256 _growthTime,
+        uint256 _maxGrowthCount,
         bytes32[] memory _tokenURIs
     ) ERC721(_name, _symbol) {
+        require(_tokenURIs.length == _maxGrowthCount + 1, "invalid length");
         _mint(msg.sender, TOKEN_ID);
+        growthTime = _growthTime;
+        maxGrowthCount = _maxGrowthCount;
         tokenURIs = _tokenURIs;
     }
 
@@ -36,12 +40,9 @@ contract Cryptodoll is ERC721 {
     function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
         require(_exists(_tokenId), "query for nonexistent token");
         uint256 growth = block.timestamp - growthStartedAt;
-        uint256 index = growth / GROWTH_TIME;
-        console.log("GROWTH_TIME", GROWTH_TIME);
-        console.log("growth", growth);
-        console.log("index", index);
-        if (index >= MAX_GROWTH_COUNT) {
-            index = MAX_GROWTH_COUNT;
+        uint256 index = growth / growthTime;
+        if (index >= maxGrowthCount) {
+            index = maxGrowthCount;
         }
         return string(tokenURIs[index].addSha256FunctionCodePrefixToDigest().toBase58().addIpfsBaseUrlPrefix());
     }

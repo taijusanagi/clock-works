@@ -1,6 +1,6 @@
 {
   "name": "cryptodoll",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -10,10 +10,9 @@
     "coverage": "hardhat coverage",
     "test": "hardhat test",
     "gas-report": "env ENABLE_GAS_REPORT=1 yarn test",
-    "run-localchain": "yarn hardhat node",
-    "deploy-contract-to-localchain": "hardhat run scripts/0_deployCryptodoll.ts --network localhost",
-    "deploy-contract-to-rinkeby": "hardhat run scripts/0_deployCryptodoll.ts --network rinkeby",
-    "deploy-contract-to-mainnet": "hardhat run scripts/0_deployCryptodoll.ts --network mainnet"
+    "generateIpfsHashes": "hardhat run scripts/0_generateIpfsHashes.ts",
+    "deploy-contract-to-rinkeby": "hardhat run scripts/1_deployCryptodoll.ts --network rinkeby",
+    "deploy-contract-to-mainnet": "hardhat run scripts/1_deployCryptodoll.ts --network mainnet"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
@@ -41,6 +40,8 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "4.0.0"
+    "@openzeppelin/contracts": "4.0.0",
+    "bs58": "^4.0.1",
+    "ipfs-mini": "^1.1.5"
   }
 }

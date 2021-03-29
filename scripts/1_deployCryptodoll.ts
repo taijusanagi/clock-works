@@ -1,8 +1,8 @@
 import { ethers } from "hardhat";
 
-export const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 10000000000; //10 gwei
+const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 10000000000; //10 gwei
 
-export const main = async () => {
+const main = async () => {
   const contractName = "Cryptodolls";
   const Contract = await ethers.getContractFactory(contractName);
   const contract = await Contract.deploy({

@@ -120,9 +120,9 @@ packages/frontend/build
 storybook-static
 
 # hardhat
-artifacts
-cache
-typechain
+packages/contracts/artifacts
+packages/contracts/cache
+packages/contracts/typechain
 packages/contracts/coverage.json
 
 # firebase

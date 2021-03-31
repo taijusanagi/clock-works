@@ -1,4 +1,0 @@
-### Contract
-
-- Rinkeby
-  0xD5E2bF046B30E141D5580baB3E133547377e58b8

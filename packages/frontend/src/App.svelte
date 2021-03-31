@@ -1,10 +1,16 @@
-<script>
-	export let name;
+<script lang="ts">
+  import { Router, Link, Route } from "svelte-routing";
+  import Home from "./pages/index.svelte";
+  import AClockworkGirl from "./pages/a-clockwork-girl.svelte";
+
+  const routes = {
+    "/": Home,
+    "/a-clockwork-girl": AClockworkGirl,
+    "*": Home,
+  };
 </script>
 
-<main>
-	<p class="text-red-200">Hello {name}!</p>
-</main>
+<Router {routes} />
 
 <style global>
   @tailwind base;

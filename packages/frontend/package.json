@@ -6,21 +6,31 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.14",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
+    "@storybook/addon-actions": "^6.2.1",
+    "@storybook/addon-essentials": "^6.2.1",
+    "@storybook/addon-links": "^6.2.1",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/svelte": "^6.2.1",
     "@tsconfig/svelte": "^1.0.0",
+    "babel-loader": "^8.2.2",
     "postcss-load-config": "^3.0.1",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.36.0",
     "svelte-check": "^1.0.0",
+    "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0"
   },
@@ -28,7 +38,6 @@
     "autoprefixer": "^9",
     "postcss": "^7",
     "sirv-cli": "^1.0.0",
-    "svelte-routing": "^1.5.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

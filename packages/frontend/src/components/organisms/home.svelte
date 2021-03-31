@@ -1,3 +1,1 @@
-<main>
-  <p>Home</p>
-</main>
+<p>Home</p>

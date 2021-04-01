@@ -43,4 +43,7 @@ module.exports = {
     currency: "JPY",
     outputFile: process.env.CI ? "gas-report.txt" : undefined,
   },
+  mocha: {
+    timeout: 50000,
+  },
 };

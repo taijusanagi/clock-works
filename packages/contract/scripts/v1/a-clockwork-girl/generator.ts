@@ -40,8 +40,7 @@ const images = [
 
 const metadataTemplate = {
   name: "A Clockwork Girl",
-  description: `
-  The doll-like girl in this painting is actually alive. The evidence of this is that her hair grows little by little. Of course, this picture is not a video file or GIF animation of the process of hair growth. It is an image data of a watercolor painting on paper, and yet the hair is growing on its own. This NFT art work is not a simple attachment of conventional image data or video files. Her hair has been programmed to grow automatically by a uniquely created NFT contract. It is a new challenge to integrate smart contracts and artworks in this work. We invite you to experience the eeriness of a girl who lives on the blockchain.
+  description: `The doll-like girl in this painting is actually alive. The evidence of this is that her hair grows little by little. Of course, this picture is not a video file or GIF animation of the process of hair growth. It is an image data of a watercolor painting on paper, and yet the hair is growing on its own. This NFT art work is not a simple attachment of conventional image data or video files. Her hair has been programmed to grow automatically by a uniquely created NFT contract. It is a new challenge to integrate smart contracts and artworks in this work. We invite you to experience the eeriness of a girl who lives on the blockchain.
   この絵の中の人形のような少女は実は生きています。その証拠に彼女の髪の毛は少しずつ伸びていきます。もちろんこの絵は髪が伸びる過程を撮影した動画ファイルやGIFアニメではありません。紙に描かれた水彩画の画像データなのに勝手に髪が伸びているのです。このNFTアート作品は従来からある画像データや動画ファイルを添付しただけの単純なものではありません。独自に作成されたNFTコントラクトによって、彼女の髪は自動的に伸びるようプログラムされています。この作品ではスマートコントラクトとアート作品を一体化する新しい挑戦です。ブロックチェーン上で生きている少女の不気味さをぜひ体感してください。
   artwork creator: ©︎ 2021 Sam Sato, contract creator: ©︎ 2021 taijusanagi`,
 };

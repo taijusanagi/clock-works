@@ -1,36 +1,46 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./IPFS.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "./extensions/IPFS.sol";
+import "./interfaces/IHasSecondarySaleFees.sol";
 
-contract Clockworks_v1 is ERC721 {
+contract Clockworks_v1 is Initializable, ERC721Upgradeable {
     using IPFS for bytes32;
     using IPFS for bytes;
 
-    uint256 public totalSupply;
-    uint256 public growthTime;
-    uint256 public maxGrowthCount;
-
-    bytes32[] public tokenURIs;
     mapping(uint256 => uint256) public clockStartedAt;
 
-    constructor(
+    uint256 public totalSupply;
+    uint256 public switchTime;
+    uint256 public maxSwitchCount;
+
+    bytes32[] private tokenURIs;
+    address payable[] private royaltyRecipients;
+    uint256[] private royaltyBps;
+
+    function initialize(
         string memory _name,
         string memory _symbol,
         uint256 _totalSupply,
-        uint256 _growthTime,
-        uint256 _maxGrowthCount,
-        bytes32[] memory _tokenURIs
-    ) ERC721(_name, _symbol) {
-        require(_tokenURIs.length == _maxGrowthCount + 1, "invalid length");
+        uint256 _switchTime,
+        uint256 _maxSwitchCount,
+        bytes32[] memory _tokenURIs,
+        address payable[] memory _royaltyRecipients,
+        uint256[] memory _royaltyBps
+    ) public initializer {
+        require(_tokenURIs.length == _maxSwitchCount + 1, "invalid length");
         for (uint256 i = 1; i <= _totalSupply; i++) {
             _mint(msg.sender, i);
         }
         totalSupply = _totalSupply;
-        growthTime = _growthTime;
-        maxGrowthCount = _maxGrowthCount;
+        switchTime = _switchTime;
+        maxSwitchCount = _maxSwitchCount;
         tokenURIs = _tokenURIs;
+        royaltyRecipients = _royaltyRecipients;
+        royaltyBps = _royaltyBps;
+        __ERC721_init_unchained(_name, _symbol);
     }
 
     function _beforeTokenTransfer(
@@ -43,11 +53,25 @@ contract Clockworks_v1 is ERC721 {
 
     function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
         require(_exists(_tokenId), "query for nonexistent token");
-        uint256 growth = block.timestamp - clockStartedAt[_tokenId];
-        uint256 index = growth / growthTime;
-        if (index >= maxGrowthCount) {
-            index = maxGrowthCount;
+        uint256 clockedTime = block.timestamp - clockStartedAt[_tokenId];
+        uint256 index = clockedTime / switchTime;
+        if (index >= maxSwitchCount) {
+            index = maxSwitchCount;
         }
         return string(tokenURIs[index].addSha256FunctionCodePrefixToDigest().toBase58().addIpfsBaseUrlPrefix());
+    }
+
+    function getFeeRecipients(uint256 _tokenId) public view returns (address payable[] memory) {
+        require(_exists(_tokenId), "query for nonexistent token");
+        return royaltyRecipients;
+    }
+
+    function getFeeBps(uint256 _tokenId) public view returns (uint256[] memory) {
+        require(_exists(_tokenId), "query for nonexistent token");
+        return royaltyBps;
+    }
+
+    function supportsInterface(bytes4 _interfaceId) public view override returns (bool) {
+        return _interfaceId == type(IHasSecondarySaleFees).interfaceId || super.supportsInterface(_interfaceId);
     }
 }

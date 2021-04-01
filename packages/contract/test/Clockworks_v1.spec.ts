@@ -5,18 +5,19 @@ import {
   ERC721_INTERFACE_ID,
   ERC721_METADATA_INTERFACE_ID,
   HAS_SECONRARY_SALE_FEES,
-  tokenURIs,
-  cids,
+  NAME,
+  SYMBOL,
+  TOTAL_SUPPLY,
+  TOKEN_URL_LIST,
+  CID_LIST,
   GROWTH_TIME,
   MAX_GORWTH_COUNT,
-} from "../helpers/constants";
+} from "../scripts/v1/a-clockwork-girl/constants";
 
 chai.use(solidity);
 const { expect } = chai;
 
 const tokenId = 1;
-const name = "name";
-const symbol = "symbol";
 
 const addOneDay = async () => {
   await network.provider.send("evm_increaseTime", [GROWTH_TIME]);
@@ -28,12 +29,12 @@ describe("Chocomold", function () {
 
   this.beforeEach("initialization.", async function () {
     [signer] = await ethers.getSigners();
-    const Contract = await ethers.getContractFactory("Cryptodoll");
-    dollContract = await Contract.deploy(name, symbol, GROWTH_TIME, MAX_GORWTH_COUNT, tokenURIs);
+    const Contract = await ethers.getContractFactory("Clockworks_v1");
+    dollContract = await Contract.deploy(NAME, SYMBOL, TOTAL_SUPPLY, GROWTH_TIME, MAX_GORWTH_COUNT, TOKEN_URL_LIST);
   });
   it("deploy check", async function () {
-    expect(await dollContract.name()).to.equal(name);
-    expect(await dollContract.symbol()).to.equal(symbol);
+    expect(await dollContract.name()).to.equal(NAME);
+    expect(await dollContract.symbol()).to.equal(SYMBOL);
     expect(await dollContract.ownerOf(tokenId)).to.equal(signer.address);
   });
   it("interface check", async function () {
@@ -44,11 +45,11 @@ describe("Chocomold", function () {
   it("check token url", async function () {
     const max = 30;
     for (let i = 0; i <= max; i++) {
-      expect(await dollContract.tokenURI(tokenId)).to.equal("ipfs://" + cids[i]);
+      expect(await dollContract.tokenURI(tokenId)).to.equal("ipfs://" + CID_LIST[i]);
       await addOneDay();
     }
     // just make sure after max growth, same metadata
     await addOneDay();
-    expect(await dollContract.tokenURI(tokenId)).to.equal("ipfs://" + cids[max]);
+    expect(await dollContract.tokenURI(tokenId)).to.equal("ipfs://" + CID_LIST[max]);
   });
 });

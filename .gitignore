@@ -119,10 +119,10 @@ dist
 packages/frontend/public/build
 
 # hardhat
-packages/contracts/artifacts
-packages/contracts/cache
-packages/contracts/typechain
-packages/contracts/coverage.json
+packages/contract/artifacts
+packages/contract/cache
+packages/contract/typechain
+packages/contract/coverage.json
 
 # firebase
 .firebase

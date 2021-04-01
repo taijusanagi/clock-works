@@ -10,7 +10,6 @@
     "coverage": "hardhat coverage",
     "test": "hardhat test",
     "gas-report": "env ENABLE_GAS_REPORT=1 yarn test",
-    "generateIpfsHashes": "hardhat run scripts/0_generateIpfsHashes.ts",
     "deploy-contract-to-rinkeby": "hardhat run scripts/1_deployCryptodoll.ts --network rinkeby",
     "deploy-contract-to-mainnet": "hardhat run scripts/1_deployCryptodoll.ts --network mainnet"
   },

@@ -1,12 +1,12 @@
 import { ethers } from "hardhat";
 
-import { tokenURIs, GROWTH_TIME, MAX_GORWTH_COUNT } from "../helpers/constants";
+import { NAME, SYMBOL, TOKEN_URL_LIST, GROWTH_TIME, MAX_GORWTH_COUNT } from "./constants";
 
 const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 10000000000; //10 gwei
 
 const main = async () => {
-  const Contract = await ethers.getContractFactory("Cryptodoll");
-  const contract = await Contract.deploy("Cryptodoll", "CD", GROWTH_TIME, MAX_GORWTH_COUNT, tokenURIs, {
+  const Contract = await ethers.getContractFactory("Clockworks_v1");
+  const contract = await Contract.deploy(NAME, SYMBOL, GROWTH_TIME, MAX_GORWTH_COUNT, TOKEN_URL_LIST, {
     gasPrice,
   });
   console.log("deployed at", contract.address);

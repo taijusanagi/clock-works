@@ -83,3 +83,5 @@ export const ROYALTY_RECIPIENTS = [
 ];
 
 export const ROYALTY_BPS = ["500", "500"];
+
+export const OWNER = "0xb14cB7Ed9bC22092C644872A121A771e9dA31d96";

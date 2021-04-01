@@ -5,6 +5,7 @@ import {
   ERC721_INTERFACE_ID,
   ERC721_METADATA_INTERFACE_ID,
   HAS_SECONRARY_SALE_FEES,
+  OWNER,
   NAME,
   SYMBOL,
   TOTAL_SUPPLY,
@@ -34,6 +35,7 @@ describe("Chocomold", function () {
     const Contract = await ethers.getContractFactory("Clockworks_v1");
     clockworksContract = await Contract.deploy();
     await clockworksContract.initialize(
+      OWNER,
       NAME,
       SYMBOL,
       TOTAL_SUPPLY,

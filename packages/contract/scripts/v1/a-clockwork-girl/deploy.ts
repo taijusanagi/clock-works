@@ -1,11 +1,11 @@
 import { ethers } from "hardhat";
 
 import {
+  OWNER,
   NAME,
   SYMBOL,
   TOTAL_SUPPLY,
   TOKEN_URL_LIST,
-  CID_LIST,
   SWITCH_TIME,
   MAX_SWITCH_COUNT,
   ROYALTY_RECIPIENTS,
@@ -21,6 +21,7 @@ const main = async () => {
   });
   console.log("deployed at", contract.address);
   await contract.initialize(
+    OWNER,
     NAME,
     SYMBOL,
     TOTAL_SUPPLY,

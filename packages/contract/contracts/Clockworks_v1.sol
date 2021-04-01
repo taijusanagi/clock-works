@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./extensions/IPFS.sol";
 import "./interfaces/IHasSecondarySaleFees.sol";
 
-contract Clockworks_v1 is Initializable, ERC721Upgradeable {
+contract Clockworks_v1 is Initializable, ERC721Upgradeable, OwnableUpgradeable {
     using IPFS for bytes32;
     using IPFS for bytes;
 
@@ -21,6 +22,7 @@ contract Clockworks_v1 is Initializable, ERC721Upgradeable {
     uint256[] private royaltyBps;
 
     function initialize(
+        address _owner,
         string memory _name,
         string memory _symbol,
         uint256 _totalSupply,
@@ -40,6 +42,8 @@ contract Clockworks_v1 is Initializable, ERC721Upgradeable {
         tokenURIs = _tokenURIs;
         royaltyRecipients = _royaltyRecipients;
         royaltyBps = _royaltyBps;
+        __Ownable_init_unchained();
+        transferOwnership(_owner);
         __ERC721_init_unchained(_name, _symbol);
     }
 

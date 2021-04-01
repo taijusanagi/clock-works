@@ -2,14 +2,14 @@
   import Main from "../atoms/main.svelte";
   import Container from "../atoms/container.svelte";
   import Header from "../organisms/header.svelte";
-  import Home from "../organisms/home.svelte";
-  import Footer from "../organisms/footer.svelte";
+  import Hero from "../organisms/hero.svelte";
+  import AClockworkGirl from "../organisms/a-clockwork-girl.svelte";
 </script>
 
 <Main>
   <Header />
+  <Hero />
   <Container>
-    <Home />
+    <AClockworkGirl />
   </Container>
-  <Footer />
 </Main>

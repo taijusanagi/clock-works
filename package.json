@@ -8,7 +8,10 @@
   ],
   "scripts": {
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,js,json,md,sol,svelte}\"",
-    "lint": "eslint . --ignore-path .gitignore"
+    "lint": "eslint . --ignore-path .gitignore",
+    "build": "yarn workspace frontend build",
+    "predeploy": "yarn build",
+    "deploy": "firebase deploy"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.19.0",
@@ -16,6 +19,7 @@
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
+    "firebase-tools": "9.6.0",
     "prettier": "^2.2.1",
     "prettier-plugin-solidity": "1.0.0-beta.5",
     "prettier-plugin-svelte": "^2.2.0",

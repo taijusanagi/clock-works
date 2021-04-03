@@ -10,8 +10,8 @@
     "coverage": "hardhat coverage",
     "test": "hardhat test",
     "gas-report": "env ENABLE_GAS_REPORT=1 yarn test",
-    "deploy-contract-to-rinkeby": "hardhat run scripts/1_deployCryptodoll.ts --network rinkeby",
-    "deploy-contract-to-mainnet": "hardhat run scripts/1_deployCryptodoll.ts --network mainnet"
+    "deploy-contract-to-rinkeby": "hardhat run scripts/v1/a-clockwork-girl/deploy.ts --network rinkeby",
+    "deploy-contract-to-mainnet": "hardhat run scripts/v1/a-clockwork-girl/deploy.ts --network mainnet"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",

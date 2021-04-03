@@ -12,14 +12,16 @@ import {
   ROYALTY_BPS,
 } from "./constants";
 
-const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 10000000000; //10 gwei
+const gasPrice = process.env.GAS_PRICE ? parseInt(process.env.GAS_PRICE) : 111000000000; //100 gwei
 
 const main = async () => {
-  const Contract = await ethers.getContractFactory("Clockworks_v1");
-  const contract = await Contract.deploy({
-    gasPrice,
-  });
-  console.log("deployed at", contract.address);
+  // const Contract = await ethers.getContractFactory("Clockworks_v1");
+  // const contract = await Contract.deploy({
+  //   gasPrice,
+  // });
+  // console.log("deployed at", contract.address);
+  const contract = await ethers.getContractAt("Clockworks_v1", "0xc9b087f7f5d4d00478bb736b9a47bf7927976bca");
+  console.log(contract);
   await contract.initialize(
     OWNER,
     NAME,
@@ -29,7 +31,10 @@ const main = async () => {
     MAX_SWITCH_COUNT,
     TOKEN_URL_LIST,
     ROYALTY_RECIPIENTS,
-    ROYALTY_BPS
+    ROYALTY_BPS,
+    {
+      gasPrice,
+    }
   );
   console.log("initialized.");
 };
